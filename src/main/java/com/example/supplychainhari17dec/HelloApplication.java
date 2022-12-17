@@ -22,6 +22,23 @@ import java.io.IOException;
 public class HelloApplication extends Application {
 
 
+    public static final int width = 700,height  = 600,headerBar = 50;
+
+    Pane bodyPane =  new Pane();
+
+
+    private GridPane headerBar(){
+        TextField searchText =  new TextField();
+        Button searchButton  = new Button("Search");
+
+        GridPane gridPane  = new GridPane();
+
+        gridPane.add(searchText,0,0);
+
+        return gridPane;
+    }
+
+
     private GridPane loginPage(){
         Label emailLabel = new Label("Email");
         Label passwordLabel  = new Label("Password");
@@ -42,7 +59,14 @@ public class HelloApplication extends Application {
 
         Pane root = new Pane();
 
-        root.getChildren().addAll(loginPage());
+        root.setPrefSize(width,height+headerBar);
+
+        bodyPane.setMinSize(width,height);
+        bodyPane.setTranslateY(headerBar);
+
+        bodyPane.getChildren().addAll(loginPage());
+
+        root.getChildren().addAll(headerBar(),bodyPane);
         return root;
     }
 
@@ -50,7 +74,8 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 //        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(createContent());
+        Scene scene;
+        scene = new Scene(createContent());
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
