@@ -2,6 +2,7 @@ package com.example.supplychainhari17dec;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -32,8 +33,14 @@ public class HelloApplication extends Application {
         Button searchButton  = new Button("Search");
 
         GridPane gridPane  = new GridPane();
+        gridPane.setMinSize(bodyPane.getMinWidth(),headerBar-10);
+        gridPane.setVgap(5);
+        gridPane.setHgap(5);
+
+        gridPane.setAlignment(Pos.CENTER);
 
         gridPane.add(searchText,0,0);
+        gridPane.add(searchButton,1,0);
 
         return gridPane;
     }
@@ -42,16 +49,37 @@ public class HelloApplication extends Application {
     private GridPane loginPage(){
         Label emailLabel = new Label("Email");
         Label passwordLabel  = new Label("Password");
+        Label messageLabel = new Label("I am message");
 
         TextField emailTextField = new TextField();
         PasswordField passwordField = new PasswordField();
 
+        Button loginButton = new Button("Login");
+        loginButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                String email = emailTextField.getText();
+                String password = passwordField.getText();
+                messageLabel.setText(email+" $$ "+password);
+            }
+        });
+
         GridPane gridPane = new GridPane();
+        gridPane.setMinSize(bodyPane.getMinWidth(),bodyPane.getMinHeight());
+        gridPane.setVgap(5);
+        gridPane.setHgap(5);
+        gridPane.setStyle("-fx-background-color: #C0C0C0");
+
+        gridPane.setAlignment(Pos.CENTER);
+
 
         gridPane.add(emailLabel,0,0);
         gridPane.add(emailTextField,1,0);
         gridPane.add(passwordLabel,0,1);
         gridPane.add(passwordField,1,1);
+        gridPane.add(loginButton,0,2);
+        gridPane.add(messageLabel,1,2);
 
         return gridPane;
     }
