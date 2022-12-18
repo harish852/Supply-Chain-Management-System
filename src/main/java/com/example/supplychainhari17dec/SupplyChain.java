@@ -19,6 +19,8 @@ public class SupplyChain extends Application {
 
     Pane bodyPane =  new Pane();
 
+    Login login = new Login();
+
 
     private GridPane headerBar(){
         TextField searchText =  new TextField();
@@ -53,7 +55,13 @@ public class SupplyChain extends Application {
 
                 String email = emailTextField.getText();
                 String password = passwordField.getText();
-                messageLabel.setText(email+" $$ "+password);
+//                messageLabel.setText(email+" $$ "+password);
+                if(login.customerLogin(email,password)){
+                    messageLabel.setText("Login Successful");
+                }
+                else{
+                    messageLabel.setText("Login failed");
+                }
             }
         });
 
