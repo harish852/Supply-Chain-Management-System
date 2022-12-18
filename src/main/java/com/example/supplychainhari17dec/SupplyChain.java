@@ -1,7 +1,6 @@
 package com.example.supplychainhari17dec;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -9,18 +8,11 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Orientation;
-import javafx.scene.Node;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import java.io.IOException;
-
-public class HelloApplication extends Application {
+public class SupplyChain extends Application {
 
 
     public static final int width = 700,height  = 600,headerBar = 50;
@@ -69,6 +61,7 @@ public class HelloApplication extends Application {
         gridPane.setMinSize(bodyPane.getMinWidth(),bodyPane.getMinHeight());
         gridPane.setVgap(5);
         gridPane.setHgap(5);
+
         gridPane.setStyle("-fx-background-color: #C0C0C0");
 
         gridPane.setAlignment(Pos.CENTER);
