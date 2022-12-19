@@ -78,6 +78,45 @@ public class SupplyChain extends Application {
         return gridPane;
     }
 
+       private GridPane footerBar(){
+
+        Button addToCart = new Button("Add to cart");
+        Button buyNowButton = new Button("Buy Now");
+
+        Label messageLabel = new Label("");
+        buyNowButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Product selectedProduct  = productDetails.getSelectedProduct();
+                if(Order.placeOrder(customerEmail,selectedProduct)){
+                      messageLabel.setText("Ordered");
+                }
+                else{
+                    messageLabel.setText("Order Failed");
+                }
+            }
+        });
+
+        GridPane gridPane = new GridPane();
+        gridPane.setMinSize(bodyPane.getMinWidth(),headerBar-10);
+        gridPane.setVgap(10);
+        gridPane.setHgap(50);
+
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setTranslateY(headerBar+height+5);
+
+
+        gridPane.add(addToCart,0,0);
+        gridPane.add(buyNowButton,1,0);
+        gridPane.add(messageLabel,2,0);
+        gridPane.setStyle("-fx-background-color: #81c483");
+
+        return gridPane;
+
+       }
+
+
+
 
     private GridPane loginPage(){
         Label emailLabel = new Label("Email");
@@ -106,7 +145,7 @@ public class SupplyChain extends Application {
                 else{
                     messageLabel.setText("Login failed");
                     globalLoginButton.setDisable(false);
-                    
+
                 }
             }
         });
@@ -121,6 +160,7 @@ public class SupplyChain extends Application {
         gridPane.setAlignment(Pos.CENTER);
 
 
+
         gridPane.add(emailLabel,0,0);
         gridPane.add(emailTextField,1,0);
         gridPane.add(passwordLabel,0,1);
@@ -130,18 +170,20 @@ public class SupplyChain extends Application {
 
         return gridPane;
     }
+
+
     private Pane createContent(){
 
         Pane root = new Pane();
 
-        root.setPrefSize(width,height+headerBar);
+        root.setPrefSize(width,height+2*headerBar+10);
 
         bodyPane.setMinSize(width,height);
         bodyPane.setTranslateY(headerBar);
 
         bodyPane.getChildren().addAll(productDetails.getAllProduct());
 
-        root.getChildren().addAll(headerBar(),bodyPane);
+        root.getChildren().addAll(headerBar(),bodyPane,footerBar());
         return root;
     }
 
