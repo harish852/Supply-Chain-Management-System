@@ -46,11 +46,11 @@ public class ProductDetails {
 
     public Pane getProductsByName(String productName){
         TableColumn id = new TableColumn("PRODUCT_ID");
-        id.setCellValueFactory(new PropertyValueFactory<>("PRODUCT_ID"));
+        id.setCellValueFactory(new PropertyValueFactory<>("id"));
         TableColumn name = new TableColumn("PRODUCT_NAME");
-        name.setCellValueFactory(new PropertyValueFactory<>("PRODUCT_NAME"));
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
         TableColumn price = new TableColumn("PRODUCT_PRICE");
-        price.setCellValueFactory(new PropertyValueFactory<>("PRODUCT_PRICE"));
+        price.setCellValueFactory(new PropertyValueFactory<>("price"));
         productTable.setStyle("-fx-font-size: 50;");
 
 //

@@ -5,6 +5,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -68,7 +70,7 @@ public class SupplyChain extends Application {
         gridPane.setVgap(5);
         gridPane.setHgap(5);
         gridPane.add(globalLoginButton,2,0);
-        gridPane.add(customerEmailLbel,3,0);
+        gridPane.add(customerEmailLbel,5,0);
 
         gridPane.setAlignment(Pos.CENTER);
 
@@ -103,6 +105,7 @@ public class SupplyChain extends Application {
         addToCart.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+
                 Product selectedProduct = productDetails.getSelectedProduct();
                 if(wishList.placeWishList(customerEmail,selectedProduct)){
                     cartLabel.setText("Added to cart");
@@ -123,9 +126,9 @@ public class SupplyChain extends Application {
 
 
         gridPane.add(addToCart,0,0);
-        gridPane.add(buyNowButton,1,0);
-        gridPane.add(messageLabel,2,0);
-        gridPane.add(cartLabel,2,0);
+        gridPane.add(buyNowButton,4,0);
+        gridPane.add(messageLabel,5,0);
+        gridPane.add(cartLabel,1,0);
         gridPane.setStyle("-fx-background-color: #5F9EA0");
 
         return gridPane;
@@ -138,7 +141,7 @@ public class SupplyChain extends Application {
     private GridPane loginPage(){
         Label emailLabel = new Label("Email");
         Label passwordLabel  = new Label("Password");
-        Label messageLabel = new Label("I am message");
+        Label messageLabel = new Label("Existing User?");
 
         TextField emailTextField = new TextField();
         PasswordField passwordField = new PasswordField();
@@ -155,7 +158,7 @@ public class SupplyChain extends Application {
                     messageLabel.setText("Login Successful");
                     customerEmail = email;
                     globalLoginButton.setDisable(true);
-                    customerEmailLbel.setText("Welcome: "+ customerEmail);
+                    customerEmailLbel.setText("Account : "+ customerEmail);
                     bodyPane.getChildren().clear();
                     bodyPane.getChildren().add(productDetails.getAllProduct());
                 }
@@ -177,7 +180,10 @@ public class SupplyChain extends Application {
         gridPane.setAlignment(Pos.CENTER);
 
 
-
+        emailLabel.setTextFill(Color.web("#0076a3"));
+        emailLabel.setFont(new Font("Arial",20));
+        passwordLabel.setTextFill(Color.web("#0076a3"));
+        passwordLabel.setFont(new Font("Arial",15));
         gridPane.add(emailLabel,0,0);
         gridPane.add(emailTextField,1,0);
         gridPane.add(passwordLabel,0,1);
