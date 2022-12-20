@@ -15,7 +15,7 @@ import java.io.IOException;
 public class SupplyChain extends Application {
 
 
-    public static final int width = 700,height  = 600,headerBar = 50;
+    public static final int width = 1600,height  = 600,headerBar = 60;
 
     Pane bodyPane =  new Pane();
     public static int bodyWidth,bodyHeight;
@@ -41,9 +41,9 @@ public class SupplyChain extends Application {
                 String productName = searchText.getText();
 
 //                //clear body and put this new pane in the body
-                bodyPane.getChildren().clear();
+//                bodyPane.getChildren().clear();
                 bodyPane.getChildren().add( productDetails.getProductsByName(productName));
-//                bodyPane.setStyle("-fx-background-color: #81c483");
+                bodyPane.setStyle("-fx-background-color: #5F9EA0");
             }
         });
 
@@ -55,6 +55,7 @@ public class SupplyChain extends Application {
             public void handle(ActionEvent actionEvent) {
                 bodyPane.getChildren().clear();
                 bodyPane.getChildren().add(loginPage());
+
                 globalLoginButton.setDisable(true);
 
             }
@@ -73,7 +74,7 @@ public class SupplyChain extends Application {
 
         gridPane.add(searchText,0,0);
         gridPane.add(searchButton,1,0);
-        gridPane.setStyle("-fx-background-color: #81c483");
+        gridPane.setStyle("-fx-background-color: #5F9EA0");
 
         return gridPane;
     }
@@ -84,6 +85,7 @@ public class SupplyChain extends Application {
         Button buyNowButton = new Button("Buy Now");
 
         Label messageLabel = new Label("");
+        Label cartLabel = new Label("");
         buyNowButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -93,6 +95,19 @@ public class SupplyChain extends Application {
                 }
                 else{
                     messageLabel.setText("Order Failed");
+                }
+            }
+        });
+
+        addToCart.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Product selectedProduct = productDetails.getSelectedProduct();
+                if(wishList.placeWishList(customerEmail,selectedProduct)){
+                    cartLabel.setText("Added to cart");
+                }
+                else{
+                    cartLabel.setText("Product cannot be added to cart");
                 }
             }
         });
@@ -109,7 +124,8 @@ public class SupplyChain extends Application {
         gridPane.add(addToCart,0,0);
         gridPane.add(buyNowButton,1,0);
         gridPane.add(messageLabel,2,0);
-        gridPane.setStyle("-fx-background-color: #81c483");
+        gridPane.add(cartLabel,2,0);
+        gridPane.setStyle("-fx-background-color: #5F9EA0");
 
         return gridPane;
 
@@ -176,7 +192,7 @@ public class SupplyChain extends Application {
 
         Pane root = new Pane();
 
-        root.setPrefSize(width,height+2*headerBar+10);
+        root.setPrefSize(1500,height+2*headerBar+10);
 
         bodyPane.setMinSize(width,height);
         bodyPane.setTranslateY(headerBar);

@@ -45,12 +45,12 @@ public class ProductDetails {
 
 
     public Pane getProductsByName(String productName){
-        TableColumn id = new TableColumn("id");
-        id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        TableColumn name = new TableColumn("Name");
-        name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        TableColumn price = new TableColumn("Price");
-        price.setCellValueFactory(new PropertyValueFactory<>("price"));
+        TableColumn id = new TableColumn("PRODUCT_ID");
+        id.setCellValueFactory(new PropertyValueFactory<>("PRODUCT_ID"));
+        TableColumn name = new TableColumn("PRODUCT_NAME");
+        name.setCellValueFactory(new PropertyValueFactory<>("PRODUCT_NAME"));
+        TableColumn price = new TableColumn("PRODUCT_PRICE");
+        price.setCellValueFactory(new PropertyValueFactory<>("PRODUCT_PRICE"));
 
 //
 //        ObservableList<Product> data = FXCollections.observableArrayList();
@@ -66,7 +66,7 @@ public class ProductDetails {
         productTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         Pane tablePane = new Pane();
-//        tablePane.setStyle("-fx-background-color: #C0C0C0");
+        tablePane.setStyle("-fx-background-color: #C0C0C0");
         tablePane.setMinSize(SupplyChain.width,SupplyChain.height);
         tablePane.getChildren().add(productTable);
         return tablePane;
