@@ -51,6 +51,7 @@ public class ProductDetails {
         name.setCellValueFactory(new PropertyValueFactory<>("PRODUCT_NAME"));
         TableColumn price = new TableColumn("PRODUCT_PRICE");
         price.setCellValueFactory(new PropertyValueFactory<>("PRODUCT_PRICE"));
+        productTable.setStyle("-fx-font-size: 50;");
 
 //
 //        ObservableList<Product> data = FXCollections.observableArrayList();
@@ -66,7 +67,7 @@ public class ProductDetails {
         productTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         Pane tablePane = new Pane();
-        tablePane.setStyle("-fx-background-color: #C0C0C0");
+        tablePane.setStyle("-fx-background-color: #5F9EA0");
         tablePane.setMinSize(SupplyChain.width,SupplyChain.height);
         tablePane.getChildren().add(productTable);
         return tablePane;

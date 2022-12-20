@@ -76,6 +76,7 @@ public class SupplyChain extends Application {
         gridPane.add(searchButton,1,0);
         gridPane.setStyle("-fx-background-color: #5F9EA0");
 
+
         return gridPane;
     }
 
@@ -200,6 +201,7 @@ public class SupplyChain extends Application {
         bodyPane.getChildren().addAll(productDetails.getAllProduct());
 
         root.getChildren().addAll(headerBar(),bodyPane,footerBar());
+//        root.setStyle("-fx-background-color: #5F9EA0");
         return root;
     }
 
@@ -209,7 +211,7 @@ public class SupplyChain extends Application {
 //        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene;
         scene = new Scene(createContent());
-        stage.setTitle("Hello!");
+        stage.setTitle("FIPZON");
         stage.setScene(scene);
         stage.show();
     }
