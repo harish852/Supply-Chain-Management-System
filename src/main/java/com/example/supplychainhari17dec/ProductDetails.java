@@ -15,11 +15,11 @@ public class ProductDetails {
     public TableView<Product> productTable;
 
     public Pane getAllProduct(){
-        TableColumn id = new TableColumn("id");
+        TableColumn id = new TableColumn("PRODUCT_ID");
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        TableColumn name = new TableColumn("Name");
+        TableColumn name = new TableColumn("PRODUCT_NAME");
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        TableColumn price = new TableColumn("Price");
+        TableColumn price = new TableColumn("PRODUCT_PRICE");
         price.setCellValueFactory(new PropertyValueFactory<>("price"));
 
 //

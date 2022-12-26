@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,10 +24,12 @@ public class SupplyChain extends Application {
     public static int bodyWidth,bodyHeight;
 
     Login login = new Login();
+    Login signUp = new Login();
 
     ProductDetails productDetails = new ProductDetails();
 
     Button globalLoginButton;
+    Button globalSignUpButton;
 
     Label customerEmailLbel = null;
 
@@ -45,7 +48,7 @@ public class SupplyChain extends Application {
 //                //clear body and put this new pane in the body
 //                bodyPane.getChildren().clear();
                 bodyPane.getChildren().add( productDetails.getProductsByName(productName));
-                bodyPane.setStyle("-fx-background-color: #5F9EA0");
+//                bodyPane.setStyle("-fx-background-color: #5F9EA0");
             }
         });
 
@@ -62,15 +65,31 @@ public class SupplyChain extends Application {
 
             }
         });
+        globalSignUpButton = new Button("Sign Up");
+
+        globalSignUpButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                bodyPane.getChildren().clear();
+                bodyPane.getChildren().add(signUpPage());
+
+                globalSignUpButton.setDisable(false);
+            }
+        });
+
 
         customerEmailLbel = new Label("Welcome User");
+        customerEmailLbel.setFont(Font.font("Times New Roman" , FontWeight.BOLD,15));
+        customerEmailLbel.setTextFill(Color.BLACK);
 
         GridPane gridPane  = new GridPane();
         gridPane.setMinSize(bodyPane.getMinWidth(),headerBar-10);
         gridPane.setVgap(5);
         gridPane.setHgap(5);
         gridPane.add(globalLoginButton,2,0);
-        gridPane.add(customerEmailLbel,5,0);
+        gridPane.add(customerEmailLbel,6,0);
+        gridPane.add(globalSignUpButton,4,0);
+
 
         gridPane.setAlignment(Pos.CENTER);
 
@@ -94,10 +113,14 @@ public class SupplyChain extends Application {
             public void handle(ActionEvent actionEvent) {
                 Product selectedProduct  = productDetails.getSelectedProduct();
                 if(Order.placeOrder(customerEmail,selectedProduct)){
-                      messageLabel.setText("Ordered");
+                    messageLabel.setText("Ordered");
+                    messageLabel.setFont(Font.font("Verdana" , FontWeight.BOLD,15));
+                    messageLabel.setTextFill(Color.BLACK);
                 }
                 else{
                     messageLabel.setText("Order Failed");
+                    messageLabel.setFont(Font.font("Verdana" , FontWeight.BOLD,15));
+                    messageLabel.setTextFill(Color.RED);
                 }
             }
         });
@@ -109,9 +132,13 @@ public class SupplyChain extends Application {
                 Product selectedProduct = productDetails.getSelectedProduct();
                 if(wishList.placeWishList(customerEmail,selectedProduct)){
                     cartLabel.setText("Added to cart");
+                    cartLabel.setFont(Font.font("Verdana" , FontWeight.BOLD,15));
+                    cartLabel.setTextFill(Color.BLACK);
                 }
                 else{
                     cartLabel.setText("Product cannot be added to cart");
+                    cartLabel.setFont(Font.font("Verdana" , FontWeight.BOLD,15));
+                    cartLabel.setTextFill(Color.RED);
                 }
             }
         });
@@ -141,7 +168,9 @@ public class SupplyChain extends Application {
     private GridPane loginPage(){
         Label emailLabel = new Label("Email");
         Label passwordLabel  = new Label("Password");
-        Label messageLabel = new Label("Existing User?");
+        Label messageLabel = new Label();
+        messageLabel.setTextFill(Color.LIGHTSEAGREEN);
+        messageLabel.setFont(new Font("Arial",15));
 
         TextField emailTextField = new TextField();
         PasswordField passwordField = new PasswordField();
@@ -159,11 +188,13 @@ public class SupplyChain extends Application {
                     customerEmail = email;
                     globalLoginButton.setDisable(true);
                     customerEmailLbel.setText("Account : "+ customerEmail);
+                    customerEmailLbel.setFont(Font.font("Verdana" , FontWeight.BOLD,15));
                     bodyPane.getChildren().clear();
                     bodyPane.getChildren().add(productDetails.getAllProduct());
                 }
                 else{
                     messageLabel.setText("Login failed");
+                    messageLabel.setTextFill(Color.RED);
                     globalLoginButton.setDisable(false);
 
                 }
@@ -180,10 +211,10 @@ public class SupplyChain extends Application {
         gridPane.setAlignment(Pos.CENTER);
 
 
-        emailLabel.setTextFill(Color.web("#0076a3"));
-        emailLabel.setFont(new Font("Arial",20));
-        passwordLabel.setTextFill(Color.web("#0076a3"));
-        passwordLabel.setFont(new Font("Arial",15));
+        emailLabel.setTextFill(Color.LIGHTSEAGREEN);
+        emailLabel.setFont(new Font("Times New Roman",18));
+        passwordLabel.setTextFill(Color.LIGHTSEAGREEN);
+        passwordLabel.setFont(new Font("Times New Roman",18));
         gridPane.add(emailLabel,0,0);
         gridPane.add(emailTextField,1,0);
         gridPane.add(passwordLabel,0,1);
@@ -193,6 +224,81 @@ public class SupplyChain extends Application {
 
         return gridPane;
     }
+
+
+
+
+    private GridPane signUpPage(){
+        Label emailLabel = new Label("Email");
+        Label passwordLabel  = new Label("Password");
+        Label messageLabel = new Label();
+        messageLabel.setTextFill(Color.LIGHTSEAGREEN);
+        messageLabel.setFont(new Font("Times New Roman",15));
+
+        TextField emailTextField = new TextField();
+        PasswordField passwordField = new PasswordField();
+
+        Button signUpButton = new Button("Sign Up");
+        signUpButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                String email = emailTextField.getText();
+                String password = passwordField.getText();
+//                messageLabel.setText(email+" $$ "+password);
+                if(login.customerSignUp(email,password)){
+
+                    customerEmail = email;
+                    globalSignUpButton.setDisable(false);
+//                    customerEmailLbel.setText("Account : "+ customerEmail);
+//                    customerEmailLbel.setFont(Font.font("Verdana" , FontWeight.BOLD,15));
+                    bodyPane.getChildren().clear();
+                    messageLabel.setText("        Registered Successfully." +
+                            "\nyou can now login to your account.");
+                    messageLabel.setTextFill(Color.DARKGREEN);
+                    messageLabel.setFont(new Font("Times New Roman",20));
+                    messageLabel.setTranslateX(10);
+                    messageLabel.setTranslateY(0);
+
+                    bodyPane.getChildren().add(messageLabel);
+                }
+                else{
+                    messageLabel.setText("Email already exists");
+                    globalSignUpButton.setDisable(false);
+
+                }
+            }
+        });
+
+        GridPane gridPane = new GridPane();
+        gridPane.setMinSize(bodyPane.getMinWidth(),bodyPane.getMinHeight());
+        gridPane.setVgap(5);
+        gridPane.setHgap(5);
+
+//        gridPane.setStyle("-fx-background-color: #C0C0C0");
+
+        gridPane.setAlignment(Pos.CENTER);
+
+
+        emailLabel.setTextFill(Color.LIGHTSEAGREEN);
+        emailLabel.setFont(new Font("Times New Roman",18));
+        passwordLabel.setTextFill(Color.LIGHTSEAGREEN);
+        passwordLabel.setFont(new Font("Times New Roman",18));
+        gridPane.add(emailLabel,0,0);
+        gridPane.add(emailTextField,1,0);
+        gridPane.add(passwordLabel,0,1);
+        gridPane.add(passwordField,1,1);
+        gridPane.add(signUpButton,0,4);
+        gridPane.add(messageLabel,0,1);
+
+        return gridPane;
+    }
+
+
+
+
+
+
 
 
     private Pane createContent(){

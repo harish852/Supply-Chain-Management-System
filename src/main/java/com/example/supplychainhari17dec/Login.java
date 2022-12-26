@@ -48,6 +48,22 @@ public class Login {
 
     }
 
+    public boolean customerSignUp(String email, String password) {
+        String query = String.format("insert into customer (email,password) VALUES ('%s','%s')",email,password);
+
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        int rowCount  =0;
+        try{
+            rowCount = databaseConnection.executeUpdateQuery(query);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return rowCount!=0;
+
+    }
+
+}
 
 
 //    public static void main(String[] args) {
@@ -60,4 +76,4 @@ public class Login {
 //        System.out.println(login.getEncryptedPassword("abc@123"));
 //    }
 
-}
+
