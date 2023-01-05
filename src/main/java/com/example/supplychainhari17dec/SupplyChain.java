@@ -186,7 +186,7 @@ public class SupplyChain extends Application {
                 if(login.customerLogin(email,password)){
                     messageLabel.setText("Login Successful");
                     customerEmail = email;
-                    globalLoginButton.setDisable(true);
+//                    globalLoginButton.setDisable(true);
                     customerEmailLbel.setText("Account : "+ customerEmail);
                     customerEmailLbel.setFont(Font.font("Verdana" , FontWeight.BOLD,15));
                     bodyPane.getChildren().clear();
@@ -263,7 +263,10 @@ public class SupplyChain extends Application {
                     bodyPane.getChildren().add(messageLabel);
                 }
                 else{
-                    messageLabel.setText("Email already exists");
+                    messageLabel.setText("Email already exists!");
+                    messageLabel.setTranslateX(110);
+                    messageLabel.setTranslateY(35);
+                    messageLabel.setTextFill(Color.RED);
                     globalSignUpButton.setDisable(false);
 
                 }
